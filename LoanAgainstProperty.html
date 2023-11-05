@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Apply For Loan: Loan Against Property</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<style>
+  form{
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10px;
+}
+
+.custom-input {
+  border: 1px solid #323232;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+label{
+  font-weight: bold;
+}
+h5{
+  margin: 2rem;
+  padding: 0.5rem;
+  border: 1.4px solid black;
+  border-radius: 0.5rem;
+}
+
+
+
+</style> 
+</head>
+ <body>
+    <div class="row justify-content-center">
+        <h5>LOAN AGAINST PROPERTY</h5>
+    </div>
+    <form id="myForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control custom-input" id="name" name="name" placeholder="Enter Your Name" required>
+        </div>
+        
+
+          <div class="form-group">
+            <label for="mob">Contact Number</label>
+            <input type="tel" class="form-control custom-input" id="mob" name="mob" placeholder="Enter mobile no." required>
+          </div>
+
+          <div class="form-group">
+            <label for="pinCode">Pin Code</label>
+            <input type="text" class="form-control custom-input" id="pinCode" name="pinCode" placeholder="Enter Pin Code" step="100" required>
+          </div>
+
+        <div class="form-group">
+            <label for="loanAmount">Loan Amount</label>
+            <input type="number" class="form-control custom-input" id="loanAmount" name="loanAmount" placeholder="Enter Amount" step="100" required>
+          </div>
+        
+          <div class="row justify-content-center">
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+      </form>
+      <script>
+        document.getElementById("myForm").addEventListener("submit", function (event) {
+    var submitButton = document.querySelector("#myForm button[type='submit']")
+    event.preventDefault();
+    var nameField = document.getElementById("name").value;
+    var mobField = document.getElementById("mob").value;
+    var pinCodeField = document.getElementById("pinCode").value;
+    var amountField = document.getElementById("loanAmount").value;
+
+var formData = {
+    name: nameField,
+    mob: mobField,
+    pinCode: pinCodeField,
+    loanAmount: amountField
+};
+
+console.log("Form Data:", formData);
+const AppUrl='https://script.google.com/macros/s/AKfycbwbVGzz4_dijnEE_UxqxlrECnBKBC5H1bqD16oicvYbV2sFDRey5n9XbTZTF_Y3YJv6cQ/exec'
+
+if(validInput()){
+    submitButton.disabled=true
+    fetch(AppUrl, {
+        method: "POST",
+        body: JSON.stringify(formData)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        document.getElementById("myForm").reset()
+        submitButton.disabled = false
+        window.location.href = "success.html"
+    }).catch((error) => {
+        console.error("Error:", error)
+        submitButton.disabled = false
+    })
+  }
+})
+
+function validInput(){
+    var mobField = document.getElementById("mob").value;
+    var pinCodeField = document.getElementById("pinCode").value;
+    const mobRegex = /^\d{10}$/;
+    const pincodePattern = /^\d{6}$/;
+
+    if (!mobRegex.test(mobField)) {
+        alert("Mobile number must have 10 digits");
+        return false;
+    }
+
+    if (!pincodePattern.test(pinCodeField)) {
+        alert("Pin code number must have 6 digits");
+        return false;
+    }
+
+    return true
+}
+
+      </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>    
+ </body>
+</html>
+  
